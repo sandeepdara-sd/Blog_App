@@ -3,6 +3,9 @@
 ## Overview
 This is a full-stack blog application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. The application allows users to create, read, update, and delete blog posts while maintaining session management using Redux. MUI (Material-UI) is used for responsive and modern styling.
 
+## Deployment
+The application is live at: [sd-blogapp.vercel.app](https://sd-blogapp.vercel.app/)
+
 ## Features
 - User authentication (login, logout, signup)
 - Create, read, update, and delete blog posts
