@@ -14,6 +14,20 @@ export const getAllUsers = async(req,res,next)=>{
     return res.status(200).json({users})
 }
 
+export const getUserById = async(req,res,next)=>{
+    const userId = req.params.id;
+    let user;
+    try{
+        user = await User.findById(userId).populate('blogs');
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message:"Error fetching user details"});
+    }
+    if(!user){
+        return res.status(404).json({message:"User not found"})
+    }
+    return res.status(200).json({user})
+}
 
 export const signup = async(req,res,next)=>{
     const {name,email,password} = req.body;

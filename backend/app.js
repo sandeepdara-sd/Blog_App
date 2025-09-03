@@ -14,6 +14,8 @@ mongoose.connect("mongodb+srv://sandeepdara44:1234567890@cluster0.5z3d3z6.mongod
 .then(()=>app.listen(5000))
 .then(()=>console.log("DB Connected and listening on port 5000"))
 .catch((err)=>console.log(err))
+
+// Catch-all route should come after API routes
 app.use('/', (req, res) => {
     res.send('Hello World');
 });
