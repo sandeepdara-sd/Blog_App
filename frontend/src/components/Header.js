@@ -209,7 +209,7 @@ const Header = () => {
   const navigate  = useNavigate();
   const handleLogout = () => {
     dispatch(authActions.logout());
-    navigate("/auth", { replace: true });
+    navigate("/", { replace: true });
   };
 
   return (
