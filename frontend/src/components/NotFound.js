@@ -56,6 +56,7 @@ function NotFound() {
         position: 'relative',
         background: 'linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)',
         overflow: 'hidden',
+        overflowY: 'hidden',
       }}
     >
       {/* Morphing blob decoration */}
@@ -103,6 +104,7 @@ function NotFound() {
                 fontWeight: 800,
                 lineHeight: 0.9,
                 letterSpacing: '-0.02em',
+                fontFamily: '"Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                 color: 'transparent',
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
                 backgroundSize: '200% 200%',
@@ -135,6 +137,7 @@ function NotFound() {
             sx={{
               fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
               fontWeight: 700,
+              fontFamily: '"Sora", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
               mb: 2,
               color: '#1a1a1a',
               letterSpacing: '-0.02em',
@@ -148,6 +151,7 @@ function NotFound() {
           <Typography
             sx={{
               fontSize: { xs: '1rem', sm: '1.125rem' },
+              fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
               color: '#666',
               mb: 5,
               maxWidth: '500px',
@@ -177,6 +181,7 @@ function NotFound() {
                 py: 1.75,
                 fontSize: { xs: '0.95rem', sm: '1.05rem' },
                 fontWeight: 600,
+                fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                 borderRadius: '12px',
                 textTransform: 'none',
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
