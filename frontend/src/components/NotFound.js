@@ -1,215 +1,230 @@
-import { Box, Typography, Button, Container, Fade, Slide } from '@mui/material';
+import { Box, Typography, Button, Container } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { keyframes } from '@mui/system';
 
-// Animation keyframes
-const float = keyframes`
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
-const pulse = keyframes`
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+const scaleIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 `;
 
-const glitch = keyframes`
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
+const shimmer = keyframes`
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+`;
+
+const morphBlob = keyframes`
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
 `;
 
 function NotFound() {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   return (
-    <Container 
-      sx={{ 
+    <Box
+      sx={{
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
+        background: 'linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)',
         overflow: 'hidden',
       }}
     >
-      {/* Animated background circles */}
+      {/* Morphing blob decoration */}
       <Box
         sx={{
           position: 'absolute',
-          top: '10%',
-          left: '10%',
-          width: '300px',
-          height: '300px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, rgba(25, 118, 210, 0.1), rgba(156, 39, 176, 0.1))',
-          filter: 'blur(60px)',
-          animation: `${float} 6s ease-in-out infinite`,
+          top: '-10%',
+          right: '-5%',
+          width: { xs: '250px', md: '400px' },
+          height: { xs: '250px', md: '400px' },
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          opacity: 0.08,
+          animation: `${morphBlob} 10s ease-in-out infinite`,
           zIndex: 0,
         }}
       />
+      
       <Box
         sx={{
           position: 'absolute',
-          bottom: '10%',
-          right: '10%',
-          width: '400px',
-          height: '400px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(233, 30, 99, 0.1))',
-          filter: 'blur(80px)',
-          animation: `${float} 8s ease-in-out infinite`,
-          animationDelay: '1s',
+          bottom: '-10%',
+          left: '-5%',
+          width: { xs: '300px', md: '500px' },
+          height: { xs: '300px', md: '500px' },
+          background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+          opacity: 0.06,
+          animation: `${morphBlob} 15s ease-in-out infinite`,
+          animationDelay: '2s',
           zIndex: 0,
         }}
       />
 
-      {/* Main content */}
-      <Box sx={{ textAlign: 'center', position: 'relative', zIndex: 1, maxWidth: 600 }}>
-        {/* 404 Number with glitch effect */}
-        <Fade in timeout={800}>
-          <Box
-            sx={{
-              position: 'relative',
-              display: 'inline-block',
-              mb: 4,
-            }}
-          >
+      <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            animation: `${scaleIn} 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)`,
+          }}
+        >
+          {/* 404 with sophisticated styling */}
+          <Box sx={{ mb: 1, position: 'relative' }}>
             <Typography
               sx={{
-                fontSize: { xs: '120px', sm: '160px', md: '200px' },
-                fontWeight: 900,
-                lineHeight: 1,
-                background: 'linear-gradient(135deg, #1976d2 0%, #9c27b0 50%, #e91e63 100%)',
-                backgroundClip: 'text',
+                fontSize: { xs: '140px', sm: '180px', md: '220px' },
+                fontWeight: 800,
+                lineHeight: 0.9,
+                letterSpacing: '-0.02em',
+                color: 'transparent',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                backgroundSize: '200% 200%',
                 WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                animation: `${glitch} 3s infinite`,
-                textShadow: '0 0 30px rgba(25, 118, 210, 0.3)',
+                backgroundClip: 'text',
+                position: 'relative',
+                display: 'inline-block',
+                '&::before': {
+                  content: '"404"',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)',
+                  backgroundSize: '1000px 100%',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  animation: `${shimmer} 3s infinite`,
+                  zIndex: 1,
+                },
               }}
             >
               404
             </Typography>
-            
-            {/* Glowing effect layers */}
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                fontSize: { xs: '120px', sm: '160px', md: '200px' },
-                fontWeight: 900,
-                lineHeight: 1,
-                color: 'primary.main',
-                opacity: 0.1,
-                animation: `${pulse} 2s ease-in-out infinite`,
-                zIndex: -1,
-              }}
-            >
-              404
-            </Box>
           </Box>
-        </Fade>
 
-        {/* Title */}
-        <Slide direction="up" in timeout={1000}>
-          <Typography 
-            variant="h3" 
-            sx={{ 
-              mb: 2, 
-              fontWeight: 800,
-              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-              background: 'linear-gradient(90deg, #1976d2, #9c27b0)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+          {/* Premium heading */}
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
+              fontWeight: 700,
+              mb: 2,
+              color: '#1a1a1a',
+              letterSpacing: '-0.02em',
+              animation: `${fadeInUp} 0.8s ease-out 0.2s both`,
             }}
           >
-            Page Not Found
+            Lost in Space
           </Typography>
-        </Slide>
 
-        {/* Description */}
-        <Slide direction="up" in timeout={1200}>
-          <Typography 
-            variant="h6"
-            color="text.secondary" 
-            sx={{ 
+          {/* Subheading with character */}
+          <Typography
+            sx={{
+              fontSize: { xs: '1rem', sm: '1.125rem' },
+              color: '#666',
               mb: 5,
-              px: { xs: 2, sm: 4 },
-              fontSize: { xs: '1rem', sm: '1.25rem' },
-              fontWeight: 400,
-              lineHeight: 1.6,
+              maxWidth: '500px',
+              mx: 'auto',
+              lineHeight: 1.7,
+              animation: `${fadeInUp} 0.8s ease-out 0.4s both`,
             }}
           >
-            Oops! The page you're looking for seems to have wandered off into the digital void.
+            The page you're searching for has drifted into the unknown.
+            <br />
+            Let's get you back on track.
           </Typography>
-        </Slide>
 
-        {/* Button */}
-        <Fade in timeout={1400}>
-          <Box>
+          {/* CTA Button with market-level design */}
+          <Box
+            sx={{
+              animation: `${fadeInUp} 0.8s ease-out 0.6s both`,
+            }}
+          >
             <Button
               component={RouterLink}
               to={isLoggedIn ? "/blogs" : "/"}
               variant="contained"
-              size="large"
+              disableElevation
               sx={{
-                px: 5,
-                py: 1.5,
-                fontSize: '1.1rem',
+                px: { xs: 4, sm: 6 },
+                py: 1.75,
+                fontSize: { xs: '0.95rem', sm: '1.05rem' },
                 fontWeight: 600,
-                borderRadius: '50px',
+                borderRadius: '12px',
                 textTransform: 'none',
-                background: 'linear-gradient(135deg, #1976d2 0%, #9c27b0 100%)',
-                boxShadow: '0 8px 24px rgba(25, 118, 210, 0.3)',
-                transition: 'all 0.3s ease',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: '#fff',
+                letterSpacing: '0.3px',
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: '-100%',
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                  transition: 'left 0.5s ease',
+                },
                 '&:hover': {
-                  background: 'linear-gradient(135deg, #1565c0 0%, #7b1fa2 100%)',
-                  boxShadow: '0 12px 32px rgba(25, 118, 210, 0.4)',
                   transform: 'translateY(-2px)',
+                  boxShadow: '0 12px 24px -10px rgba(102, 126, 234, 0.6)',
+                  '&::before': {
+                    left: '100%',
+                  },
                 },
                 '&:active': {
                   transform: 'translateY(0)',
                 },
               }}
             >
-              {isLoggedIn ? "Return to Blogs" : "Go Back Home"}
+              {isLoggedIn ? "Back to Blogs" : "Take Me Home"}
             </Button>
           </Box>
-        </Fade>
 
-        {/* Decorative elements */}
-        <Box
-          sx={{
-            mt: 6,
-            display: 'flex',
-            justifyContent: 'center',
-            gap: 2,
-          }}
-        >
-          {[0, 1, 2].map((i) => (
-            <Box
-              key={i}
-              sx={{
-                width: 8,
-                height: 8,
-                borderRadius: '50%',
-                bgcolor: 'primary.main',
-                opacity: 0.3,
-                animation: `${pulse} 2s ease-in-out infinite`,
-                animationDelay: `${i * 0.3}s`,
-              }}
-            />
-          ))}
+          {/* Subtle help text */}
+          <Typography
+            sx={{
+              mt: 4,
+              fontSize: '0.875rem',
+              color: '#999',
+              animation: `${fadeInUp} 0.8s ease-out 0.8s both`,
+            }}
+          >
+            Error Code: 404 • Page Not Found
+          </Typography>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }
 
