@@ -6,7 +6,7 @@ import Blogs from './components/Blogs.js'
 import UserBlog from './components/UserBlog.js'
 import AddBlog from './components/AddBlog.js'
 import BlogDetail from './components/BlogDetail.js'
-
+import NotFound from './components/NotFound.js'
 import {useDispatch, useSelector} from 'react-redux'
 import { authActions } from './store/index.js'
 import Signup from './components/Signup.js'
@@ -131,9 +131,7 @@ const App = () => {
           } />
           
           {/* Fallback Route - Only redirect if we're sure user is not logged in */}
-          <Route path="*" element={
-            isInitialized && !isLoggedIn ? <Navigate to="/" replace /> : <First/>
-          } />
+         <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </div>
